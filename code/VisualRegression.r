@@ -7,3 +7,5 @@ ggplot(father.son, aes(x=fheight, y=sheight)) +
 
 heightMod <- lm(sheight ~ fheight, data=father.son)
 heightMod
+
+summary(heightMod)
