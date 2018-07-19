@@ -17,3 +17,17 @@ valueFormula <- TotalValue ~ FireService +
     LotFront + LotDepth + BldgFront + 
     BldgDepth + LotType + Landmark + BuiltFAR +
     Built + HistoricDistrict - 1
+
+valueFormula
+class(valueFormula)
+
+value1 <- lm(valueFormula, data=land_train)
+coefplot(value1, sort='magnitude')
+
+summary(value1)
+
+landX_train <- build.x(valueFormula, data=land_train, contrasts=FALSE, sparse=TRUE)
+landY_train <- build.y(valueFormula, data=land_train)
+
+value2 <- glmnet(x=landX_train, y=landY_train, family='gaussian')
+coefpath(value2)
