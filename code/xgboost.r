@@ -105,3 +105,31 @@ xgb.plot.importance(
         xg6, feature_names=colnames(landX_train)
     )
 )
+
+
+xg7 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    eval_metric='logloss',
+    booster='gblinear',
+    nrounds=1000,
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=10,
+    early_stopping_rounds=70
+)
+
+coefplot(xg7, sort='magnitude')
+
+xg8 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    eval_metric='logloss',
+    booster='gblinear',
+    nrounds=1000,
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=10,
+    early_stopping_rounds=70,
+    alpha=1000, lambda=1250
+)
+
+dygraph(xg8$evaluation_log)
