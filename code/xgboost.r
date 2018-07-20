@@ -85,3 +85,23 @@ xg5 <- xgb.train(
 
 xg5$evaluation_log
 dygraph(xg5$evaluation_log)
+
+xg6 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    eval_metric='logloss',
+    booster='gbtree',
+    nrounds=1000,
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=10,
+    early_stopping_rounds=70
+)
+dygraph(xg6$evaluation_log)
+xg6$best_iteration
+xg6$best_score
+
+xgb.plot.importance(
+    xgb.importance(
+        xg6, feature_names=colnames(landX_train)
+    )
+)
