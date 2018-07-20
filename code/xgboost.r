@@ -32,3 +32,56 @@ landY_test <- build.y(histFormula, data=land_test) %>% as.factor() %>% as.intege
 
 xgTrain <- xgb.DMatrix(data=landX_train, label=landY_train)
 xgVal <- xgb.DMatrix(data=landX_val, label=landY_val)
+
+xg1 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    eval_metric='logloss',
+    booster='gbtree',
+    nrounds=1
+)
+xg1
+
+xgb.plot.multi.trees(xg1, feature_names=colnames(landX_train))
+
+xg2 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    eval_metric='logloss',
+    booster='gbtree',
+    nrounds=1,
+    watchlist=list(train=xgTrain)
+)
+
+xg3 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    eval_metric='logloss',
+    booster='gbtree',
+    nrounds=100,
+    watchlist=list(train=xgTrain),
+    print_every_n=1
+)
+
+xg4 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    eval_metric='logloss',
+    booster='gbtree',
+    nrounds=300,
+    watchlist=list(train=xgTrain),
+    print_every_n=1
+)
+
+xg5 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    eval_metric='logloss',
+    booster='gbtree',
+    nrounds=500,
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=1
+)
+
+xg5$evaluation_log
+dygraph(xg5$evaluation_log)
