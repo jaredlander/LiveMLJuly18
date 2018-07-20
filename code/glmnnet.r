@@ -56,3 +56,10 @@ value6 <- cv.glmnet(x=landX_train, y=landY_train,
                     family='gaussian', nfolds=5,
                     alpha=0.6)
 coefpath(value6)
+
+landX_test <- build.x(valueFormula, data=land_test, contrasts=FALSE, sparse=TRUE)
+
+landPredictions_6 <- predict(value6, newx=landX_test, s='lambda.1se')
+head(landPredictions_6)
+
+value6$lambda
