@@ -133,3 +133,108 @@ xg8 <- xgb.train(
 )
 
 dygraph(xg8$evaluation_log)
+
+
+xg9 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    eval_metric='logloss',
+    booster='gbtree',
+    nrounds=1000,
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=10,
+    early_stopping_rounds=70,
+    max_depth=8
+)
+
+xg10 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    eval_metric='logloss',
+    booster='gbtree',
+    nrounds=1000,
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=10,
+    early_stopping_rounds=70,
+    max_depth=3
+)
+
+xg11 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    eval_metric='logloss',
+    booster='gbtree',
+    nrounds=2500,
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=10,
+    early_stopping_rounds=70,
+    max_depth=8, eta=0.1
+)
+
+xg12 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    eval_metric='logloss',
+    booster='gbtree',
+    nrounds=2500,
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=10,
+    early_stopping_rounds=70,
+    max_depth=8, eta=0.1,
+    subsample=0.5
+)
+
+xg13 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    eval_metric='logloss',
+    booster='gbtree',
+    nrounds=2500,
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=10,
+    early_stopping_rounds=70,
+    max_depth=8, eta=0.1,
+    subsample=0.5, colsample_bytree=0.5
+)
+
+xg14 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    eval_metric='logloss',
+    booster='gbtree',
+    nrounds=1,
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=1,
+    early_stopping_rounds=70,
+    max_depth=8, eta=0.1,
+    subsample=0.5, colsample_bytree=0.5,
+    num_parallel_tree=100
+)
+
+
+xg15 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    eval_metric='logloss',
+    booster='gbtree',
+    nrounds=100,
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=1,
+    early_stopping_rounds=70,
+    max_depth=8, eta=0.1,
+    subsample=0.5, colsample_bytree=0.5,
+    num_parallel_tree=20
+)
+
+xg15 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    eval_metric='logloss',
+    booster='gbtree',
+    nrounds=2000,
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=10,
+    early_stopping_rounds=70,
+    max_depth=8, eta=0.1,
+    nthread=2
+)
