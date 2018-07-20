@@ -30,3 +30,5 @@ landY_val <- build.y(histFormula, data=land_val) %>% as.factor() %>% as.integer(
 landX_test <- build.x(histFormula, data=land_test, contrasts=FALSE, sparse=TRUE)
 landY_test <- build.y(histFormula, data=land_test) %>% as.factor() %>% as.integer() - 1
 
+xgTrain <- xgb.DMatrix(data=landX_train, label=landY_train)
+xgVal <- xgb.DMatrix(data=landX_val, label=landY_val)
