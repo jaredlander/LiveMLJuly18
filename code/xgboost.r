@@ -226,7 +226,7 @@ xg15 <- xgb.train(
     num_parallel_tree=20
 )
 
-xg15 <- xgb.train(
+xg16 <- xgb.train(
     data=xgTrain,
     objective='binary:logistic',
     eval_metric='logloss',
@@ -238,3 +238,8 @@ xg15 <- xgb.train(
     max_depth=8, eta=0.1,
     nthread=2
 )
+
+?xgb.train
+
+xgPreds16 <- predict(xg16, newdata=landX_test, outputmargin=FALSE)
+xgPreds16 %>% head(n=20) %>% round(2)
